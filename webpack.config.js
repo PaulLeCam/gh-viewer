@@ -13,6 +13,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.(png|ttf)$/,
+        loader: 'file-loader',
+      },
     ],
   },
   target: 'electron',
