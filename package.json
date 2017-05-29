@@ -7,24 +7,28 @@
 		"ios": "react-native run-ios",
 		"desktop": "electron ./desktop/main.js",
 		"webpack": "webpack --progress",
+		"webpack-server": "webpack-dev-server --hot --progress",
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest"
 	},
 	"dependencies": {
-		"electron": "~1.6.8",
+		"electron": "~1.6.10",
 		"react": "~15.4.1",
 		"react-dom": "~15.4.2",
 		"react-native": "0.42.3",
-		"react-native-electron": "^0.0.13",
-		"react-native-web": "^0.0.94"
+		"react-native-electron": "^0.0.15",
+		"react-native-web": "^0.0.95"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
 		"babel-loader": "^7.0.0",
 		"babel-preset-react-native": "1.9.2",
+		"babel-regenerator-runtime": "^6.5.0",
+		"flow-bin": "^0.38.0",
 		"jest": "20.0.4",
 		"react-test-renderer": "~15.4.1",
-		"webpack": "^2.6.0"
+		"webpack": "^2.6.1",
+		"webpack-dev-server": "^2.4.5"
 	},
 	"jest": {
 		"preset": "react-native"

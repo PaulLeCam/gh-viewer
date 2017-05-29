@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: './index.web.js',
+  entry: ['babel-regenerator-runtime', './index.web.js'],
   output: {
     path: path.resolve(__dirname, 'desktop', 'dist'),
     filename: 'bundle.js',
@@ -25,5 +25,10 @@ module.exports = {
   node: {
     __filename: true,
     __dirname: true,
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'desktop'),
+    overlay: true,
+    port: 8082,
   },
 }
