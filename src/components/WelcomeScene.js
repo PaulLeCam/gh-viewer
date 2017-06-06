@@ -1,21 +1,20 @@
 // @flow
 
-import React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import { Button, Icon, Text } from 'react-native-elements'
 import { graphql, QueryRenderer } from 'react-relay'
 
-import { create } from '../Environment'
+import { EnvironmentPropType } from '../Environment'
 
+import SceneLoader from './SceneLoader'
 import { sharedStyles } from './styles'
-
-const environment = create()
 
 type QueryErrorProps = {
   error: Error,
   retry: () => void,
 }
-const QueryError = ({ error, retry }: QueryErrorProps) => (
+const QueryError = ({ error, retry }: QueryErrorProps) =>
   <View style={[sharedStyles.scene, sharedStyles.centerContents]}>
     <View style={sharedStyles.mainContents}>
       <Text h2 style={sharedStyles.textCenter}>
@@ -26,23 +25,13 @@ const QueryError = ({ error, retry }: QueryErrorProps) => (
       <Button onPress={retry} title="Retry" />
     </View>
   </View>
-)
-
-const QueryLoader = () => (
-  <View style={[sharedStyles.scene, sharedStyles.centerContents]}>
-    <View style={sharedStyles.mainContents}>
-      <ActivityIndicator animating size="large" />
-      <Text h2 style={sharedStyles.textCenter}>Loading...</Text>
-    </View>
-  </View>
-)
 
 type WelcomeSceneProps = {
   viewer: {
     login: string,
   },
 }
-const WelcomeScene = ({ viewer }: WelcomeSceneProps) => (
+const WelcomeScene = ({ viewer }: WelcomeSceneProps) =>
   <View style={[sharedStyles.scene, sharedStyles.centerContents]}>
     <View style={sharedStyles.mainContents}>
       <Icon name="octoface" size={60} type="octicon" />
@@ -51,28 +40,33 @@ const WelcomeScene = ({ viewer }: WelcomeSceneProps) => (
       </Text>
     </View>
   </View>
-)
 
-const WelcomeSceneRenderer = () => (
-  <QueryRenderer
-    environment={environment}
-    query={graphql`
-      query WelcomeSceneQuery {
-        viewer {
-          login
-        }
-      }
-    `}
-    render={({ error, props, retry }) => {
-      if (error) {
-        return <QueryError error={error} retry={retry} />
-      } else if (props) {
-        return <WelcomeScene {...props} />
-      } else {
-        return <QueryLoader />
-      }
-    }}
-  />
-)
+export default class WelcomeSceneRenderer extends Component {
+  static contextTypes = {
+    environment: EnvironmentPropType.isRequired,
+  }
 
-export default WelcomeSceneRenderer
+  render() {
+    return (
+      <QueryRenderer
+        environment={this.context.environment}
+        query={graphql`
+          query WelcomeSceneQuery {
+            viewer {
+              login
+            }
+          }
+        `}
+        render={({ error, props, retry }) => {
+          if (error) {
+            return <QueryError error={error} retry={retry} />
+          } else if (props) {
+            return <WelcomeScene {...props} />
+          } else {
+            return <SceneLoader />
+          }
+        }}
+      />
+    )
+  }
+}

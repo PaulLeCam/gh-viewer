@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native'
 
-import GHViewer from './src/components/WelcomeScene'
+import GHViewer from './src/components/App'
 
 AppRegistry.registerComponent('GHViewer', () => GHViewer)
