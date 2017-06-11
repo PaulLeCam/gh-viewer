@@ -2,12 +2,12 @@ import React from 'react'
 
 import EnvironmentProvider from './EnvironmentProvider'
 import StoreProvider from './StoreProvider'
-import WelcomeScene from './WelcomeScene'
+import Navigation from './Navigation'
 
 const App = () =>
   <StoreProvider>
     <EnvironmentProvider>
-      <WelcomeScene />
+      <Navigation />
     </EnvironmentProvider>
   </StoreProvider>
 

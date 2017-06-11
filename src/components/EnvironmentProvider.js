@@ -10,7 +10,7 @@ import { parse } from 'url'
 import { create, EnvironmentPropType } from '../Environment'
 import type { Action } from '../Store'
 
-import SceneLoader from './SceneLoader'
+import ScreenLoader from './ScreenLoader'
 import { sharedStyles } from './styles'
 
 type AuthState = 'UNAUTHORIZED' | 'LOADING' | 'AUTHORIZE' | 'AUTHORIZED'
@@ -109,6 +109,7 @@ class EnvironmentProvider extends Component {
               access some of your GitHub data
             </Text>
             <Button
+              backgroundColor="#28a745"
               icon={{ name: 'shield', type: 'octicon' }}
               onPress={this.onPressAuthorize}
               title="Authorize with GitHub"
@@ -126,7 +127,7 @@ class EnvironmentProvider extends Component {
         style={auth === 'AUTHORIZE' ? sharedStyles.scene : styles.webviewHidden}
       />
     )
-    const loader = auth === 'AUTHORIZE' ? null : <SceneLoader />
+    const loader = auth === 'AUTHORIZE' ? null : <ScreenLoader />
 
     return <View style={styles.container}>{webView}{loader}</View>
   }

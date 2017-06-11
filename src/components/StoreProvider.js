@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 import { create } from '../Store'
 
-import SceneLoader from './SceneLoader'
+import ScreenLoader from './ScreenLoader'
 
 export default class StoreProvider extends Component {
   props: {
@@ -26,6 +26,6 @@ export default class StoreProvider extends Component {
   render() {
     return this.state.store
       ? <Provider store={this.state.store}>{this.props.children}</Provider>
-      : <SceneLoader />
+      : <ScreenLoader />
   }
 }

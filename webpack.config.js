@@ -19,10 +19,12 @@ module.exports = {
       },
     ],
   },
-  target: 'electron',
+  target: 'electron-renderer',
+  devtool: 'source-map',
   resolve: {
     alias: {
       'react-native': 'react-native-electron',
+      'react-navigation': 'react-navigation/lib-rn/react-navigation.js',
     },
     extensions: ['.web.js', '.js', '.json'],
   },
